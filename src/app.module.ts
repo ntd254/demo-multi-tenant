@@ -19,7 +19,6 @@ import { HttpCacheInterceptor } from './http-cache.interceptor';
           ttl: configService.get('CACHE_TTL'),
         }),
         isGlobal: true,
-        max: configService.get('CACHE_MAX'),
       }),
     }),
   ],
