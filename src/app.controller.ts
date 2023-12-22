@@ -1,9 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { StorageService } from './storage/storage.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly storageService: StorageService,
+  ) {}
 
   @Get()
   getHello(): string {
@@ -25,8 +29,8 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get('4')
-  get4(): string {
-    return this.appService.getHello();
+  @Get('upload-file')
+  uploadFile() {
+    return this.storageService.uploadFile();
   }
 }

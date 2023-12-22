@@ -1,5 +1,9 @@
 import { CacheInterceptor } from '@nestjs/cache-manager';
-import { ExecutionContext, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ExecutionContext,
+  Injectable,
+} from '@nestjs/common';
 import { Request } from 'express';
 
 @Injectable()
@@ -9,6 +13,10 @@ export class HttpCacheInterceptor extends CacheInterceptor {
 
     if (request.method !== 'GET') {
       return undefined;
+    }
+
+    if (!request.headers['x-tenant-id']) {
+      throw new BadRequestException('Tenant ID is required');
     }
 
     return request.headers['x-tenant-id'] + request.url;

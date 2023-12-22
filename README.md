@@ -35,6 +35,9 @@ $ npm install
 ## Running the app
 
 ```bash
+# Start redis & minio
+$ npm run start:docker
+
 # development
 $ npm run start
 
