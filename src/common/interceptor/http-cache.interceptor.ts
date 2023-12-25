@@ -21,8 +21,6 @@ export class HttpCacheInterceptor extends CacheInterceptor {
       throw new BadRequestException('Tenant ID is required');
     }
 
-    return request.headers['x-tenant-id'] + request.user?.id
-      ? `_user_${request.user.id}`
-      : '' + request.url;
+    return request.headers['x-tenant-id'] + request.url;
   }
 }

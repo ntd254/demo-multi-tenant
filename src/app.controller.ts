@@ -31,6 +31,11 @@ export class AppController {
 
   @Get('upload-file')
   uploadFile() {
-    return this.storageService.uploadFile();
+    return this.storageService.uploadFile('test');
+  }
+
+  @Get('create-bucket')
+  createBucket() {
+    return this.storageService.createBucket('test');
   }
 }

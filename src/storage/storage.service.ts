@@ -21,18 +21,26 @@ export class StorageService {
     this.tenantId = request.headers['x-tenant-id'] as string;
   }
 
-  async uploadFile() {
+  async uploadFile(bucketName: string) {
     if (!this.tenantId) {
       throw new BadRequestException('Tenant ID is required');
     }
 
     return await this.minioClient.fPutObject(
-      'test',
-      `${this.tenantId}/README.md`,
+      `${this.tenantId}-${bucketName}`,
+      'README.md',
       path.join(__dirname, '../../README.md'),
       {
         'Content-Type': 'text/markdown',
       },
     );
+  }
+
+  async createBucket(name: string) {
+    if (!this.tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+
+    return await this.minioClient.makeBucket(`${this.tenantId}-${name}`);
   }
 }
