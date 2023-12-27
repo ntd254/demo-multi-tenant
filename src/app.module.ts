@@ -16,10 +16,9 @@ import { StorageModule } from './storage/storage.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
-        store: await redisStore({
-          url: configService.get('REDIS_URL'),
-          ttl: configService.get('CACHE_TTL'),
-        }),
+        store: redisStore,
+        ttl: configService.get('CACHE_TTL'),
+        url: configService.get('REDIS_URL'),
         isGlobal: true,
       }),
     }),
